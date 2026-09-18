@@ -269,7 +269,7 @@
 <body>
 <header>
   <h1>All Client Scripts &ndash; Five9 Call Scripts</h1>
-  <p>Built Sep 18, 2026 11:44 AM Eastern from 18 campaign scripts. Warm transfer banners are live.
+  <p>Built Sep 18, 2026 02:40 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
      Do not edit this page &ndash; it is rebuilt from the campaign scripts.</p>
   <input id="find" type="search" placeholder="Filter firms&hellip;" autocomplete="off">
 </header>
@@ -32248,6 +32248,50 @@ var CLOSURES_THEBLEDSOEFIRM = {
     </li>
 </ul>
 <p><strong><span style="font-size:11pt;font-family:Arial,sans-serif;">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span></strong></p>
+<p><strong><span style="background-color:#ff1493;font-size:11pt;font-family:Arial,sans-serif;">Urgent (9/22): Jennifer Magana</span><span style="font-size:11pt;font-family:Arial,sans-serif;"> (702) 208-7007</span></strong></p>
+<ul>
+    <li style="list-style-type:none;color:#000000;font-size:11pt;font-family:Arial,sans-serif;">
+<div id="thebledsoefirm-wt9" style="font-family:Arial,sans-serif;font-size:11pt;padding:8px 10px;border-radius:6px;border:1px solid #ccc;margin:2px 0;">Checking office hours&hellip;</div>
+<script>
+(function(){
+ var C={tz:"America/New_York",openMin:690,closeMin:1200,days:["Mon","Tue","Wed","Thu","Fri"]};
+ function draw(){
+  var f=new Intl.DateTimeFormat("en-US",{timeZone:C.tz,weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false,year:"numeric",month:"2-digit",day:"2-digit"});
+  var o={};f.formatToParts(new Date()).forEach(function(p){o[p.type]=p.value;});
+  if(o.hour==="24")o.hour="00";
+  var m=parseInt(o.hour,10)*60+parseInt(o.minute,10);
+  var dt=o.year+"-"+o.month+"-"+o.day;
+  var shut=CLOSURES_THEBLEDSOEFIRM.closed[dt];
+  var earlyAt=CLOSURES_THEBLEDSOEFIRM.early[dt];
+  var open=!shut&&(C.days.indexOf(o.weekday)>=0&&m>=C.openMin&&m<C.closeMin)&&(earlyAt===undefined||m<earlyAt.at);
+  var e=document.getElementById("thebledsoefirm-wt9");
+  /* Live clock in the firm's own zone. Display only - every test
+     below still runs on the Eastern `o`, which is where the windows
+     and closure dates live. */
+  var lo={};new Intl.DateTimeFormat("en-US",{timeZone:"America/Los_Angeles",weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date()).forEach(function(p){lo[p.type]=p.value;});
+  if(lo.hour==="24")lo.hour="00";
+  var lh=parseInt(lo.hour,10),lap=lh<12?"AM":"PM",l12=(lh%12)||12;
+  var s=lo.weekday+" "+l12+":"+lo.minute+lap+" US Pacific Time";
+  if(open){e.style.background="#e6f4ea";e.style.border="1px solid #34a853";e.style.color="#0b6b2e";
+    e.innerHTML='<span style="font-size:13pt;"><strong>WARM TRANSFER</strong></span> &nbsp;&mdash; office is OPEN ('+s+'). Office Hours (internal reference): 11:30AM-8:00PM US Eastern Time';}
+  else if(shut){e.style.background="#fdecea";e.style.border="1px solid #d93025";e.style.color="#a50e0e";
+    e.innerHTML='<span style="font-size:13pt;"><strong>DO NOT WARM TRANSFER</strong></span> &nbsp;&mdash; office CLOSED today ('+shut+') ('+s+'). Follow the &ldquo;If Afterhours or Weekend&rdquo; steps below.';}
+  else if(earlyAt!==undefined&&m>=earlyAt.at){e.style.background="#fdecea";e.style.border="1px solid #d93025";e.style.color="#a50e0e";
+    e.innerHTML='<span style="font-size:13pt;"><strong>DO NOT WARM TRANSFER</strong></span> &nbsp;&mdash; office CLOSED EARLY today ('+earlyAt.name+') ('+s+'). Follow the &ldquo;If Afterhours or Weekend&rdquo; steps below.';}
+  else{e.style.background="#fdecea";e.style.border="1px solid #d93025";e.style.color="#a50e0e";
+    e.innerHTML='<span style="font-size:13pt;"><strong>DO NOT WARM TRANSFER</strong></span> &nbsp;&mdash; office closed / afterhours ('+s+'). Office Hours (internal reference): 11:30AM-8:00PM US Eastern Time';}
+ }
+ draw();setInterval(draw,30000);
+})();
+</script>
+        <ul>
+            <li style="list-style-type:disc;color:#000000;font-size:11pt;font-family:Arial,sans-serif;">
+                <p role="presentation"><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;">Initiate Warm Transfer to Veronica </span><strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;">(EXT 102)</span></strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;"> &rarr; Monique </span><strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;">(EXT 106)</span></strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;"> &rarr; Sarah </span><strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;">(EXT 105)</span></strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;"> &rarr; Bri </span><strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;">(EXT 112)</span></strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;"> &rarr; Paul </span><strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;">(EXT 101)</span></strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;"> &rarr; Debbie </span><strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;">(EXT 110)</span></strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;"> &rarr; Kate </span><strong><span style="background-color:#fce5cd;font-size:11pt;font-family:Arial,sans-serif;">(EXT 109)</span></strong></p>
+            </li>
+        </ul>
+    </li>
+</ul>
+<br>
 <p><strong><span style="background-color:#d9d2e9;font-size:11pt;font-family:Arial,sans-serif;">If the caller speaks Spanish or is asking for someone who speaks Spanish:</span></strong></p>
 <ul>
     <li style="list-style-type:none;color:#000000;font-size:11pt;font-family:Arial,sans-serif;">
