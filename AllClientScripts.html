@@ -128,6 +128,11 @@
       background: #fff8e1; box-shadow: inset 0 0 0 1px #fbbc04; }
   /* The unpicked marker in the notes box. Same red and size as the panel's
      .dup marker - an agent should not have to learn two warnings. */
+  /* A pick-many list (Calling For). Every option stays; click toggles it. */
+  div.notesbox ul[data-pick="many"] > li { cursor: pointer; border-radius: 3px; padding: 0 .2em; }
+  div.notesbox ul[data-pick="many"] > li:hover { background: #fff8e1; box-shadow: inset 0 0 0 1px #fbbc04; }
+  div.notesbox ul[data-pick="many"] > li[data-on] { background: #e6f4ea; box-shadow: inset 0 0 0 1px #34a853; }
+  div.notesbox ul[data-pick="many"] > li[data-on]::after { content: " \2713"; color: #0b6b2e; font-weight: bold; }
   span.notsel { font-weight: normal; margin-left: .4em; }
   span.pickagain { font-size: 8.5pt; color: #1155cc; text-decoration: underline;
       cursor: pointer; margin-left: .5em; user-select: none; }
@@ -181,6 +186,9 @@
       color: #3c4043; list-style-type: circle; }
   ul.tplpick > li:hover { background: #fff8e1; box-shadow: inset 0 0 0 1px #fbbc04; }
   div.livetplbody .tplcount { font-size: 9pt; color: #5f6368; font-weight: normal; }
+  /* the same counter on the General call email template's label - David, 2026-09-19 */
+  span.notescount { font-size: 9pt; color: #5f6368; font-weight: normal; margin-left: .3rem; }
+  span.notescount b.warn { color: #a50e0e; }
   div.notes textarea { width: 100%; box-sizing: border-box; font-family: Arial, sans-serif;
                         font-size: 11pt; padding: .5rem; border: 1px solid #dadce0;
                         border-radius: 4px; resize: vertical; }
@@ -269,7 +277,7 @@
 <body>
 <header>
   <h1>All Client Scripts &ndash; Five9 Call Scripts</h1>
-  <p>Built Sep 18, 2026 02:40 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
+  <p>Built Sep 19, 2026 03:12 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
      Do not edit this page &ndash; it is rebuilt from the campaign scripts.</p>
   <input id="find" type="search" placeholder="Filter firms&hellip;" autocomplete="off">
 </header>
@@ -1277,7 +1285,7 @@ var CLOSURES_199LEGACYLAW = {
       <span class="notestatus" data-for="summary-199legacylaw"></span>
     </div>
   </div>
-  <label for="notes-199legacylaw"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-199legacylaw"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-199legacylaw"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-199legacylaw" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">valerie@199legacylaw.com</span></li>
@@ -1309,9 +1317,11 @@ var CLOSURES_199LEGACYLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Valerie Desroches</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Joshua Davis</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose For Calling:</strong></span></p>
@@ -1363,9 +1373,11 @@ var CLOSURES_199LEGACYLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Valerie Desroches</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Joshua Davis</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose For Calling:</strong></span></p>
@@ -2749,7 +2761,7 @@ var CLOSURES_AMERICANIMMIGRATION = {
       <span class="notestatus" data-for="summary-americanimmigration"></span>
     </div>
   </div>
-  <label for="notes-americanimmigration"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-americanimmigration"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-americanimmigration"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-americanimmigration" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif;color:#1155cc">mark@usa-immigrationlaw.com</span><span style="font-size:11pt;font-family:Arial,sans-serif">, </span><span style="font-size:11pt;font-family:Arial,sans-serif;color:#1155cc">ujjawal@usa-immigrationlaw.com</span></li>
@@ -2781,7 +2793,7 @@ var CLOSURES_AMERICANIMMIGRATION = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Mark Silverman</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ujjawal Chaudhary</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Akanksha Pandey</span></li>
@@ -2790,6 +2802,8 @@ var CLOSURES_AMERICANIMMIGRATION = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Bharinee Chestapanich</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Keerti Malik</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Suman Phogat</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -2841,7 +2855,7 @@ var CLOSURES_AMERICANIMMIGRATION = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Mark Silverman</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ujjawal Chaudhary</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Akanksha Pandey</span></li>
@@ -2850,6 +2864,8 @@ var CLOSURES_AMERICANIMMIGRATION = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Bharinee Chestapanich</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Keerti Malik</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Suman Phogat</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -5995,7 +6011,7 @@ e.innerHTML='<span style="font-size:13pt;"><strong>DO NOT WARM TRANSFER</strong>
       <span class="notestatus" data-for="summary-berenson"></span>
     </div>
   </div>
-  <label for="notes-berenson"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-berenson"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-berenson"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-berenson" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">receptionist2@nmjusticelaw.com, paralegal3@nmjusticelaw.com, rachel@nmjusticelaw.com, paralegal@nmjusticelaw.com, paralegal2@nmjusticelaw.com, attorney2@nmjusticelaw.com</span></li>
@@ -6027,13 +6043,15 @@ e.innerHTML='<span style="font-size:13pt;"><strong>DO NOT WARM TRANSFER</strong>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Rachel Berenson</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ricardo Roybal</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Marie Gillentine</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Shirley Saccoccia</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Rebekah Hammond</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Nicole Soto</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -6085,13 +6103,15 @@ e.innerHTML='<span style="font-size:13pt;"><strong>DO NOT WARM TRANSFER</strong>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Rachel Berenson</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ricardo Roybal</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Marie Gillentine</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Shirley Saccoccia</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Rebekah Hammond</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Nicole Soto</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -8107,7 +8127,7 @@ var CLOSURES_BERMAN = {
       <span class="notestatus" data-for="summary-berman"></span>
     </div>
   </div>
-  <label for="notes-berman"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-berman"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-berman"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-berman" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">jberman@brslaw.com, mmerwin@brslaw.com, myralberman@aol.com </span></li>
@@ -8139,10 +8159,12 @@ var CLOSURES_BERMAN = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Jon Berman</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Frank Russo</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Marisse Merwin</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -8180,10 +8202,12 @@ var CLOSURES_BERMAN = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Jon Berman</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Frank Russo</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Marisse Merwin</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -9149,7 +9173,7 @@ var CLOSURES_CLARITYFAMILYLAW = {
       <span class="notestatus" data-for="summary-clarityfamilylaw"></span>
     </div>
   </div>
-  <label for="notes-clarityfamilylaw"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-clarityfamilylaw"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-clarityfamilylaw"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-clarityfamilylaw" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ali@claritylawfirm.com, hanadi@claritylawfirm.com</span></li>
@@ -9181,9 +9205,11 @@ var CLOSURES_CLARITYFAMILYLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ali Chokr</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Hanadi Faraj</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -9221,9 +9247,11 @@ var CLOSURES_CLARITYFAMILYLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ali Chokr</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Hanadi Faraj</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -11218,7 +11246,7 @@ var CLOSURES_DAIGLELAW = {
       <span class="notestatus" data-for="summary-daiglelaw"></span>
     </div>
   </div>
-  <label for="notes-daiglelaw"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-daiglelaw"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-daiglelaw"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-daiglelaw" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong></strong></span></p>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into &quot;To&quot; field):</strong></span></p>
@@ -11252,7 +11280,7 @@ var CLOSURES_DAIGLELAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Vicki Mitchell</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Marcella Georgi</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Margaret Scarlett</span></li>
@@ -11268,6 +11296,8 @@ var CLOSURES_DAIGLELAW = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Elina Reismann</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Sue Robbins</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Jessica Mavroide</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -11323,7 +11353,7 @@ var CLOSURES_DAIGLELAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Vicki Mitchell</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Marcella Georgi</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Margaret Scarlett</span></li>
@@ -11339,6 +11369,8 @@ var CLOSURES_DAIGLELAW = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Elina Reismann</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Sue Robbins</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Jessica Mavroide</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -13541,7 +13573,7 @@ var CLOSURES_FREKHTMAN = {
       <span class="notestatus" data-for="summary-frekhtman"></span>
     </div>
   </div>
-  <label for="notes-frekhtman"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-frekhtman"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-frekhtman"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-frekhtman" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">jennifer@866attylaw.com, nickesha@866attylaw.com, denis@866attylaw.com</span></li>
@@ -13573,7 +13605,7 @@ var CLOSURES_FREKHTMAN = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Arkady Frekhtman</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Jennifer Sheridan</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Richard Mogg</span></li>
@@ -13589,6 +13621,8 @@ var CLOSURES_FREKHTMAN = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Valerie Xavier</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Nickeisha Nembhard</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Lauren Rotuno</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -13626,7 +13660,7 @@ var CLOSURES_FREKHTMAN = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Arkady Frekhtman</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Jennifer Sheridan</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Richard Mogg</span></li>
@@ -13642,6 +13676,8 @@ var CLOSURES_FREKHTMAN = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Valerie Xavier</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Nickeisha Nembhard</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Lauren Rotuno</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -16561,7 +16597,7 @@ e.innerHTML='<span style="font-size:13pt;"><strong>MICHELE &mdash; DO NOT WARM T
       <span class="notestatus" data-for="summary-greerlaw"></span>
     </div>
   </div>
-  <label for="notes-greerlaw"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-greerlaw"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-greerlaw"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-greerlaw" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Michele@gvlegal.net, stacy@gvlegal.net </span></li>
@@ -16593,11 +16629,13 @@ e.innerHTML='<span style="font-size:13pt;"><strong>MICHELE &mdash; DO NOT WARM T
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Stacy Benner</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Henry Miniter</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Marlo Greer</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Michele Margetts</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -16649,11 +16687,13 @@ e.innerHTML='<span style="font-size:13pt;"><strong>MICHELE &mdash; DO NOT WARM T
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Stacy Benner</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Henry Miniter</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Marlo Greer</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Michele Margetts</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -18130,7 +18170,7 @@ var CLOSURES_HOLCOMBLAW = {
       <span class="notestatus" data-for="summary-holcomblaw"></span>
     </div>
   </div>
-  <label for="notes-holcomblaw"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-holcomblaw"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-holcomblaw"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-holcomblaw" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">info@attorneyholcomb.com</span></li>
@@ -18162,7 +18202,7 @@ var CLOSURES_HOLCOMBLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Wayne E. Holcomb</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">C. Carter Allen</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Chad Simpson</span></li>
@@ -18176,6 +18216,8 @@ var CLOSURES_HOLCOMBLAW = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Kristen Bowman</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Carly Walker</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ashley Holland</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose For Calling:</strong></span></p>
@@ -18213,7 +18255,7 @@ var CLOSURES_HOLCOMBLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Wayne E. Holcomb</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">C. Carter Allen</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Chad Simpson</span></li>
@@ -18227,6 +18269,8 @@ var CLOSURES_HOLCOMBLAW = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Kristen Bowman</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Carly Walker</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ashley Holland</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose For Calling:</strong></span></p>
@@ -19505,7 +19549,7 @@ var CLOSURES_JAMESSPIVEY = {
       <span class="notestatus" data-for="summary-jamesspivey"></span>
     </div>
   </div>
-  <label for="notes-jamesspivey"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-jamesspivey"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-jamesspivey"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-jamesspivey" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">office@jspiveylaw.com</span></li>
@@ -19537,11 +19581,13 @@ var CLOSURES_JAMESSPIVEY = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">James Spivey</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Gary Horton</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Amanda Ross</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Caitlin Hinton</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -19579,11 +19625,13 @@ var CLOSURES_JAMESSPIVEY = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">James Spivey</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Gary Horton</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Amanda Ross</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Caitlin Hinton</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -22264,7 +22312,7 @@ var CLOSURES_JOECUNNINGHAMLAW = {
       <span class="notestatus" data-for="summary-joecunninghamlaw"></span>
     </div>
   </div>
-  <label for="notes-joecunninghamlaw"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-joecunninghamlaw"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-joecunninghamlaw"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-joecunninghamlaw" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">joe@joecunninghamlaw.com, </span><span style="font-size:11pt;font-family:Arial,sans-serif">aaron@joecunninghamlaw.com, bailey@joecunninghamlaw.com, carolina@joecunninghamlaw.com</span></li>
@@ -22296,12 +22344,14 @@ var CLOSURES_JOECUNNINGHAMLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Joe Cunningham</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Aaron Scheer</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Carolina Lopez</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Bailey Jones</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Sydney Pendrick</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -22353,12 +22403,14 @@ var CLOSURES_JOECUNNINGHAMLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Joe Cunningham</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Aaron Scheer</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Carolina Lopez</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Bailey Jones</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Sydney Pendrick</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -23632,7 +23684,7 @@ var CLOSURES_KEVINSIMONLAW = {
       <span class="notestatus" data-for="summary-kevinsimonlaw"></span>
     </div>
   </div>
-  <label for="notes-kevinsimonlaw"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-kevinsimonlaw"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-kevinsimonlaw"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-kevinsimonlaw" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">kevin@ktsimonlaw.com, leda@ktsimonlaw.com</span></li>
@@ -23664,10 +23716,12 @@ var CLOSURES_KEVINSIMONLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Kevin Simon</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Alyssum</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Leda Lopez</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -23719,10 +23773,12 @@ var CLOSURES_KEVINSIMONLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Kevin Simon</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Alyssum</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Leda Lopez</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -25315,7 +25371,7 @@ var CLOSURES_STUSOWSKIKRAFT = {
       <span class="notestatus" data-for="summary-stusowskikraft"></span>
     </div>
   </div>
-  <label for="notes-stusowskikraft"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-stusowskikraft"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-stusowskikraft"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-stusowskikraft" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field): </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
 <ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Stacy: </span><span style="font-size:11pt;font-family:Arial,sans-serif;color:#1155cc">SS@TrustSKLaw.com</span></li>
@@ -25349,13 +25405,15 @@ var CLOSURES_STUSOWSKIKRAFT = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Patricia Kraft</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Stacy Stusowski</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">David Gullion</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Carol Boudreau</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Karen Bucchianeri</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Robin Wilkinson</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -25409,13 +25467,15 @@ var CLOSURES_STUSOWSKIKRAFT = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Patricia Kraft</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Stacy Stusowski</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">David Gullion</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Carol Boudreau</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Karen Bucchianeri</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Robin Wilkinson</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -27059,7 +27119,7 @@ var CLOSURES_PETERRUSSO = {
       <span class="notestatus" data-for="summary-peterrusso"></span>
     </div>
   </div>
-  <label for="notes-peterrusso"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-peterrusso"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-peterrusso"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-peterrusso" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">ekeefauver@pjrlaw.com, prusso@pjrlaw.com</span></li>
@@ -27091,7 +27151,7 @@ var CLOSURES_PETERRUSSO = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Peter Russo</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Kara Haggerty</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">James Welch</span></li>
@@ -27104,6 +27164,8 @@ var CLOSURES_PETERRUSSO = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Jessica Gray</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ann Arena</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Cindy Watson</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -27155,7 +27217,7 @@ var CLOSURES_PETERRUSSO = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Peter Russo</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Kara Haggerty</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">James Welch</span></li>
@@ -27168,6 +27230,8 @@ var CLOSURES_PETERRUSSO = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Jessica Gray</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ann Arena</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Cindy Watson</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -29667,7 +29731,7 @@ var CLOSURES_MERKINJURYLAW = {
       <span class="notestatus" data-for="summary-merkinjurylaw"></span>
     </div>
   </div>
-  <label for="notes-merkinjurylaw"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-merkinjurylaw"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-merkinjurylaw"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-merkinjurylaw" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">spencer@merklaw.com, reaghan@merklaw.com</span></li>
@@ -29699,11 +29763,13 @@ var CLOSURES_MERKINJURYLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Spencer Merk</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Cayla Schulz</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Reaghan Kaylor</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Norma Hernandez</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -29741,11 +29807,13 @@ var CLOSURES_MERKINJURYLAW = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Spencer Merk</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Cayla Schulz</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Reaghan Kaylor</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Norma Hernandez</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -31648,7 +31716,7 @@ var CLOSURES_RYANBROWN = {
       <span class="notestatus" data-for="summary-ryanbrown"></span>
     </div>
   </div>
-  <label for="notes-ryanbrown"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-ryanbrown"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-ryanbrown"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-ryanbrown" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif;color:#0000ff">info@ryanbrownattorneyatlaw.com, ryan@ryanbrownattorneyatlaw.com, annelise@ryanbrownattorneyatlaw.com</span></li>
@@ -31680,9 +31748,11 @@ var CLOSURES_RYANBROWN = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ryan Brown</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Annelise Mosley</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -31734,9 +31804,11 @@ var CLOSURES_RYANBROWN = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ryan Brown</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Annelise Mosley</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -34239,7 +34311,7 @@ var CLOSURES_THEBLEDSOEFIRM = {
       <span class="notestatus" data-for="summary-thebledsoefirm"></span>
     </div>
   </div>
-  <label for="notes-thebledsoefirm"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-thebledsoefirm"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-thebledsoefirm"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-thebledsoefirm" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">debbie@bledsoefirm.com, office@bledsoefirm.com</span></li>
@@ -34274,7 +34346,7 @@ var CLOSURES_THEBLEDSOEFIRM = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">John Bledsoe</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ron Gomez</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Bernadette Stafford</span></li>
@@ -34288,6 +34360,8 @@ var CLOSURES_THEBLEDSOEFIRM = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ozge Bek</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Linda Jean</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ashley Johnson</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -34342,7 +34416,7 @@ var CLOSURES_THEBLEDSOEFIRM = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">John Bledsoe</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ron Gomez</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Bernadette Stafford</span></li>
@@ -34356,6 +34430,8 @@ var CLOSURES_THEBLEDSOEFIRM = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ozge Bek</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Linda Jean</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ashley Johnson</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -35432,7 +35508,7 @@ var CLOSURES_VELIZ = {
       <span class="notestatus" data-for="summary-veliz"></span>
     </div>
   </div>
-  <label for="notes-veliz"><strong>General call email template</strong>  <span>for calls that fit no other template</span></label>
+  <label for="notes-veliz"><strong>General call email template</strong> <span class="tplcount notescount" data-for="notes-veliz"></span>  <span>for calls that fit no other template</span></label>
   <div id="notes-veliz" class="notesbox matchpanel" contenteditable="false" spellcheck="true" role="group"><p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Emails (Copy and Paste into “To” field):</strong></span></p>
 <ul style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Aveliz@velizlaw.com, Mguerra@velizlaw.com, locampo@velizlaw.com, Mginarte@velizlaw.com, hcastillo@velizlaw.com, Khernandez@velizlaw.com</span></li>
@@ -35464,7 +35540,7 @@ var CLOSURES_VELIZ = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ana M. Veliz</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Karina Hernandez</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Maryory Guerra</span></li>
@@ -35472,6 +35548,8 @@ var CLOSURES_VELIZ = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Monica Ginarte</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Nathalie Gerena</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Lindsay O&#x27;Campo</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -35509,7 +35587,7 @@ var CLOSURES_VELIZ = {
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Calling For: </strong></span><span class="notsel" style="color:#b3261e;font-size:9pt">not selected</span></p>
-<ul data-pick="one" style="margin:.1em 0;padding-left:1.6em">
+<ul data-pick="many" style="margin:.1em 0;padding-left:1.6em">
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Ana M. Veliz</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Karina Hernandez</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Maryory Guerra</span></li>
@@ -35517,6 +35595,8 @@ var CLOSURES_VELIZ = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Monica Ginarte</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Nathalie Gerena</span></li>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">Lindsay O&#x27;Campo</span></li>
+<li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">[Other]</span></li>
+<li contenteditable="true" data-none="1"><span style="font-size:11pt;font-family:Arial,sans-serif">Not Provided by Caller / Not Specified</span></li>
 </ul>
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong>Purpose for Calling:</strong></span></p>
@@ -37020,6 +37100,53 @@ var CLOSURES_VELIZ = {
     refreshNotesSubject(box);
   });
 
+  // "N of M asked · X missing" on the General box's label, the same reading
+  // the email template panel gives (tplcount). David, 2026-09-19: "add this
+  // to the General email template just like how we have it for email
+  // template." Asked = every field header in the box except the two intro
+  // headers (Emails, Subject Line); filled = its first bullet holds text
+  // that is not the "Not Selected" placeholder.
+  function refreshNotesCount(box) {
+    if (!box || !box.id) return;
+    var lab = document.querySelector('span.notescount[data-for="' + box.id + '"]');
+    if (!lab) return;
+    var ps = box.querySelectorAll("p"), asked = 0, filled = 0, i, t, ul, li, v;
+    for (i = 0; i < ps.length; i++) {
+      t = (ps[i].textContent || "").replace(/\s+/g, " ").trim();
+      if (!t || /^(Emails|Subject Line)/i.test(t)) continue;
+      ul = ps[i].nextElementSibling;
+      if (!ul || ul.tagName !== "UL") continue;
+      asked++;
+      // A pick-one list is a menu until the agent clicks; once picked it
+      // collapses to the choice and carries data-all (the menu, to restore).
+      if (ul.getAttribute("data-pick") === "one") {
+        if (ul.hasAttribute("data-all")) filled++;
+        continue;
+      }
+      if (ul.getAttribute("data-pick") === "many") {
+        if (ul.querySelector("li[data-on]")) filled++;
+        continue;
+      }
+      li = ul.querySelector("li");
+      v = li ? (li.textContent || "").replace(/\s+/g, " ").replace(/not selected$/i, "").trim() : "";
+      if (v && v !== NOT_SELECTED) filled++;
+    }
+    var missing = asked - filled;
+    lab.innerHTML = filled + " of " + asked + " asked"
+                  + (missing ? ' · <b class="warn">' + missing + " missing</b>" : "");
+  }
+  // Redraw on any change inside the box - typing, a pick, Clear, Enter /
+  // Backspace on a bullet - without hooking each path separately.
+  (function () {
+    var boxes = document.querySelectorAll(".notesbox"), i;
+    if (!window.MutationObserver) return;
+    for (i = 0; i < boxes.length; i++) (function (b) {
+      refreshNotesCount(b);
+      new MutationObserver(function () { refreshNotesCount(b); })
+        .observe(b, { subtree: true, childList: true, characterData: true });
+    })(boxes[i]);
+  })();
+
   function notesSeed(firm) {
     return firm ? document.getElementById(
       "notesseed-" + firm.id.replace("firm-", "")) : null;
@@ -37073,6 +37200,23 @@ var CLOSURES_VELIZ = {
         var sp = keep.querySelector("span") || keep;
         sp.textContent = NOT_SELECTED;
         picks[i].appendChild(keep);
+      }
+    }
+    // A pick-many list goes out as the chosen names only - or one "Not
+    // Selected" line when nothing was chosen - never the whole roster.
+    var manys = box.querySelectorAll('ul[data-pick="many"]');
+    for (i = 0; i < manys.length; i++) {
+      swapped.push([manys[i], manys[i].innerHTML]);
+      var on = manys[i].querySelectorAll("li[data-on]"), tmpl = manys[i].firstElementChild;
+      var keepers = [], j;
+      for (j = 0; j < on.length; j++) {
+        var cl = on[j].cloneNode(true); cl.removeAttribute("data-on"); keepers.push(cl);
+      }
+      manys[i].innerHTML = "";
+      if (keepers.length) for (j = 0; j < keepers.length; j++) manys[i].appendChild(keepers[j]);
+      else if (tmpl) {
+        var ns = tmpl.cloneNode(true); (ns.querySelector("span") || ns).textContent = NOT_SELECTED;
+        manys[i].appendChild(ns);
       }
     }
     var notsel = box.querySelectorAll("span.notsel"), hidden = [];
@@ -37290,11 +37434,13 @@ var CLOSURES_VELIZ = {
       w.html += '<p style="margin:.15em 0">' + SPAN + inner + "</span></p>";
       w.lines.push(t);
     };
-    w.values = function (list) {
+    w.values = function (list, italics) {
       if (!list.length) return;
       w.html += '<ul style="margin:.1em 0;padding-left:1.6em">';
-      list.forEach(function (v) {
-        w.html += "<li>" + SPAN + esc(v) + "</span></li>";
+      list.forEach(function (v, i) {
+        var inner = esc(v);
+        if (italics && italics[i]) inner = "<em>" + inner + "</em>";   // e.g. "Not Provided by Caller / Not Specified" (5br)
+        w.html += "<li>" + SPAN + inner + "</span></li>";
         w.lines.push("    " + v);
       });
       w.html += "</ul>";
@@ -37327,10 +37473,13 @@ var CLOSURES_VELIZ = {
         w.head(t, intro || FIELD_HEADERS_BOLD);
         var ul = el.nextElementSibling;
         if (ul && ul.tagName === "UL") {
-          var vals = Array.prototype.slice.call(ul.querySelectorAll("li")).map(function (li) {
-            return (li.textContent || "").replace(/\s+/g, " ").trim();
-          }).filter(function (v) { return v; });
-          w.values(vals);
+          var lis = Array.prototype.slice.call(ul.querySelectorAll("li")), vals = [], its = [];
+          lis.forEach(function (li) {
+            var v = (li.textContent || "").replace(/\s+/g, " ").trim();
+            if (!v) return;
+            vals.push(v); its.push(!!li.querySelector("em"));
+          });
+          w.values(vals, its);
         }
       }
       return { html: w.html, text: w.text() };
@@ -37624,8 +37773,10 @@ var CLOSURES_VELIZ = {
     // and withoutUI() strips it before anything is copied or saved.
     var open_ = false;
     if (done) {
-      var li = ul.querySelector("li");
-      open_ = !!li && /\[[^\]]+\]/.test(li.textContent || "");
+      var lis = ul.getAttribute("data-pick") === "many"
+              ? ul.querySelectorAll("li[data-on]") : [ul.querySelector("li")];
+      for (var q = 0; q < lis.length; q++)
+        if (lis[q] && /\[[^\]]+\]/.test(lis[q].textContent || "")) open_ = true;
     }
     m.textContent = done ? "finish this" : "not selected";
     m.style.display = (done && !open_) ? "none" : "";
@@ -37637,6 +37788,10 @@ var CLOSURES_VELIZ = {
     if (!li) return;
     var ul = pickList(li);
     if (ul && ul.getAttribute("data-picked")) markSelected(ul, true);
+    var many = upTo(li, function (x) {
+      return x.tagName === "UL" && x.getAttribute("data-pick") === "many";
+    });
+    if (many && li.hasAttribute("data-on")) markSelected(many, true);
   });
 
   document.addEventListener("click", function (e) {
@@ -37674,6 +37829,28 @@ var CLOSURES_VELIZ = {
 
     var li = upTo(t, function (x) { return x.tagName === "LI"; });
     if (!li) return;
+    var many = upTo(li, function (x) {
+      return x.tagName === "UL" && x.getAttribute("data-pick") === "many";
+    });
+    if (many) {
+      // Toggle. The list never collapses, so there is no "change" control;
+      // clicking a chosen name un-chooses it. David, 2026-09-19.
+      if (li.parentNode !== many) return;
+      if (li.hasAttribute("data-on")) li.removeAttribute("data-on");
+      else {
+        // "Not Provided by Caller / Not Specified" and a name cannot both be
+        // true: choosing either clears the other. David, 2026-09-19.
+        var sib = many.querySelectorAll("li[data-on]"), q;
+        for (q = 0; q < sib.length; q++) {
+          if (li.hasAttribute("data-none") || sib[q].hasAttribute("data-none"))
+            sib[q].removeAttribute("data-on");
+        }
+        li.setAttribute("data-on", "1");
+      }
+      markSelected(many, !!many.querySelector("li[data-on]"));
+      e.preventDefault();
+      return;
+    }
     var ul = pickList(li);
     if (!ul || ul.getAttribute("data-picked")) return;   // already chosen
 
