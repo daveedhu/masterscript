@@ -199,18 +199,19 @@
                       border: 1px solid #dadce0; border-radius: 4px; background: #fff;
                       cursor: pointer; }
   div.notes button:hover { background: #f1f3f4; }
-  /* The one control an agent must not miss, so it leads the panel and is the
-     only filled button on the page.
+  /* Copy is the agent's next step once the panel is filled, so it is the
+     only filled button on the page (David, 09-19: Copy leads, Save is
+     secondary and stays plain).
 
      BLUE ON PURPOSE. Green and red are spoken for - they are what the warm
      transfer and office hours banners use to say whether you may transfer a
      live caller. A green button here would read as banner state at a glance,
      and that is the one signal on this page that must never be ambiguous. */
-  div.notes button.savetpl,
-  div.notes button.savenotes { background: #1a73e8; color: #fff;
+  div.notes button.copytpl,
+  div.notes button.copynotes { background: #1a73e8; color: #fff;
                                 border-color: #1a73e8; font-weight: bold; }
-  div.notes button.savetpl:hover,
-  div.notes button.savenotes:hover { background: #1557b0; border-color: #1557b0; }
+  div.notes button.copytpl:hover,
+  div.notes button.copynotes:hover { background: #1557b0; border-color: #1557b0; }
   div.notes > span.notestatus { display: block; margin: -.25rem 0 .7rem; }
   span.notestatus { font-size: 9pt; color: #5f6368; margin-left: .6rem; }
   input.qa { display: none; width: 100%; box-sizing: border-box; margin: .2rem 0 .1rem;
@@ -277,7 +278,7 @@
 <body>
 <header>
   <h1>All Client Scripts &ndash; Five9 Call Scripts</h1>
-  <p>Built Sep 19, 2026 03:12 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
+  <p>Built Sep 19, 2026 04:00 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
      Do not edit this page &ndash; it is rebuilt from the campaign scripts.</p>
   <input id="find" type="search" placeholder="Filter firms&hellip;" autocomplete="off">
 </header>
@@ -1399,9 +1400,9 @@ var CLOSURES_199LEGACYLAW = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-199legacylaw"></span>
   </div>
 </div>
@@ -2887,9 +2888,9 @@ var CLOSURES_AMERICANIMMIGRATION = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-americanimmigration"></span>
   </div>
 </div>
@@ -6133,9 +6134,9 @@ e.innerHTML='<span style="font-size:13pt;"><strong>DO NOT WARM TRANSFER</strong>
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-berenson"></span>
   </div>
 </div>
@@ -8215,9 +8216,9 @@ var CLOSURES_BERMAN = {
 <li contenteditable="true" data-fill="1"><span style="font-size:11pt;font-family:Arial,sans-serif"></span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-berman"></span>
   </div>
 </div>
@@ -9259,9 +9260,9 @@ var CLOSURES_CLARITYFAMILYLAW = {
 <li contenteditable="true" data-fill="1"><span style="font-size:11pt;font-family:Arial,sans-serif"></span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-clarityfamilylaw"></span>
   </div>
 </div>
@@ -11394,9 +11395,9 @@ var CLOSURES_DAIGLELAW = {
 <div style="height:.55em"></div>
 <p style="margin:.15em 0"><span style="font-size:11pt;font-family:Arial,sans-serif"><strong></strong></span></p></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-daiglelaw"></span>
   </div>
 </div>
@@ -13685,9 +13686,9 @@ var CLOSURES_FREKHTMAN = {
 <li contenteditable="true" data-fill="1"><span style="font-size:11pt;font-family:Arial,sans-serif"></span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-frekhtman"></span>
   </div>
 </div>
@@ -16715,9 +16716,9 @@ e.innerHTML='<span style="font-size:13pt;"><strong>MICHELE &mdash; DO NOT WARM T
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-greerlaw"></span>
   </div>
 </div>
@@ -18278,9 +18279,9 @@ var CLOSURES_HOLCOMBLAW = {
 <li contenteditable="true" data-fill="1"><span style="font-size:11pt;font-family:Arial,sans-serif"></span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-holcomblaw"></span>
   </div>
 </div>
@@ -19639,9 +19640,9 @@ var CLOSURES_JAMESSPIVEY = {
 <li contenteditable="true" data-fill="1"><span style="font-size:11pt;font-family:Arial,sans-serif"></span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-jamesspivey"></span>
   </div>
 </div>
@@ -22432,9 +22433,9 @@ var CLOSURES_JOECUNNINGHAMLAW = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-joecunninghamlaw"></span>
   </div>
 </div>
@@ -23800,9 +23801,9 @@ var CLOSURES_KEVINSIMONLAW = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-kevinsimonlaw"></span>
   </div>
 </div>
@@ -25497,9 +25498,9 @@ var CLOSURES_STUSOWSKIKRAFT = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-stusowskikraft"></span>
   </div>
 </div>
@@ -27253,9 +27254,9 @@ var CLOSURES_PETERRUSSO = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-peterrusso"></span>
   </div>
 </div>
@@ -29821,9 +29822,9 @@ var CLOSURES_MERKINJURYLAW = {
 <li contenteditable="true" data-fill="1"><span style="font-size:11pt;font-family:Arial,sans-serif"></span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-merkinjurylaw"></span>
   </div>
 </div>
@@ -31830,9 +31831,9 @@ var CLOSURES_RYANBROWN = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-ryanbrown"></span>
   </div>
 </div>
@@ -34453,9 +34454,9 @@ var CLOSURES_THEBLEDSOEFIRM = {
 <li contenteditable="true"><span style="font-size:11pt;font-family:Arial,sans-serif">No: [Other Reason]</span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-thebledsoefirm"></span>
   </div>
 </div>
@@ -35604,9 +35605,9 @@ var CLOSURES_VELIZ = {
 <li contenteditable="true" data-fill="1"><span style="font-size:11pt;font-family:Arial,sans-serif"></span></li>
 </ul></div>
   <div class="btnrow">
-    <button type="button" class="copynotes">Copy notes</button>
-    <button type="button" class="clearnotes">Clear notes</button>
-    <button type="button" class="savenotes">⬇ Save notes</button>
+    <button type="button" class="copynotes">Copy template</button>
+    <button type="button" class="clearnotes">Clear</button>
+    <button type="button" class="savenotes">⬇ Save template</button>
     <span class="notestatus" data-for="notes-veliz"></span>
   </div>
 </div>
@@ -38004,8 +38005,12 @@ var CLOSURES_VELIZ = {
       // a pick left behind after clearing would carry into the next caller.
       Array.prototype.slice.call(firm.querySelectorAll("input.qa"))
         .forEach(function (x) { x.value = ""; });
-      var hn = document.getElementById("note-" + firm.id.replace("firm-", ""));
-      if (hn) { hn.value = ""; hn.style.height = "auto"; }
+      // The scratch pad is NOT touched by any Clear button. David,
+      // 2026-09-19: "make sure the scratchpad notes does not get deleted
+      // under any circumstances when you click any of the Clear buttons."
+      // (Until today this button emptied it; the General box's Clear never
+      // did, and the two disagreeing is what he noticed.) The agent clears
+      // the pad by hand. Rulebook 5ad, amended.
       Object.keys(PICKED).forEach(function (k) {
         if (k.indexOf(firm.id + "|") === 0) delete PICKED[k];
       });
@@ -38031,7 +38036,7 @@ var CLOSURES_VELIZ = {
     if (kind === "clearnotes") {
       var nb0 = notesOf(firm), sd0 = notesSeed(firm);
       if (nb0 && sd0) nb0.innerHTML = sd0.innerHTML;
-      mark(firm, "Notes reset to the General template", false, "n");
+      mark(firm, "Cleared", false, "n");
       return;
     }
 
