@@ -168,9 +168,16 @@
     box-shadow: inset 0 0 0 1px #dadce0; }
   div.livetplbody li[contenteditable="true"]:focus { background: #fffdf5;
     outline: 2px solid #fbbc04; }
-  div.livetplbody li.missing { color: #b3261e; font-style: italic; }
+  /* "Not Provided by Caller" and "Not Applicable" are PLACEHOLDERS, not
+     text. David, 2026-09-19: the missing line loses its red and reads like
+     Not Applicable (grey italic), and both become hints the agent types
+     straight over - no deleting first, like the MM/DD/YYYY hint (5bo). The
+     <li> is empty; the words are drawn from data-ph. Copy / Save still send
+     the words, because tplForEmail reads the answers, not this markup. */
+  div.livetplbody li.missing, div.livetplbody li.na { color: #80868b; font-style: italic; }
+  div.livetplbody li.ph:empty::before { content: attr(data-ph); color: #80868b;
+                                         font-style: italic; pointer-events: none; }
   div.livetplbody li.manual { color: #9aa0a6; font-style: italic; }
-  div.livetplbody li.na { color: #80868b; font-style: italic; }
   div.livetplbody li.manual input.tplman { width: 100%; box-sizing: border-box;
       font-family: Arial, sans-serif; font-size: 10.5pt; font-style: normal;
       color: #202124; padding: .2rem .4rem; margin: .05rem 0;
@@ -278,7 +285,7 @@
 <body>
 <header>
   <h1>All Client Scripts &ndash; Five9 Call Scripts</h1>
-  <p>Built Sep 19, 2026 04:00 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
+  <p>Built Sep 19, 2026 04:21 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
      Do not edit this page &ndash; it is rebuilt from the campaign scripts.</p>
   <input id="find" type="search" placeholder="Filter firms&hellip;" autocomplete="off">
 </header>
@@ -35945,6 +35952,15 @@ var CLOSURES_VELIZ = {
     return e.text.split("\n");
   }
 
+  // A placeholder line ("Not Provided by Caller" / "Not Applicable") the
+  // agent typed over by hand. David, 2026-09-19: the "N of M asked · X
+  // missing" count must move when a gap is filled in the panel, not only
+  // when an answer box is typed in.
+  function handFilled(key, base) {
+    var e = EDITED[key];
+    return !!(e && e.base === base && e.text.trim() !== "");
+  }
+
   // Collected-panel shape for the template view. Piloted on 199 Legacy Law
   // for David's review, 2026-09-06, before going to the other sixteen.
   var ASCOLLECTED = {
@@ -36758,6 +36774,12 @@ var CLOSURES_VELIZ = {
       // panel and saw one where a field had a single ordinary value. A
       // bracket is only a defect where the agent was meant to type over it.
       return row(head, now.map(function (v) {
+        // The untouched "Not Provided by Caller" / "Not Applicable" line is a
+        // placeholder (see the li.ph CSS): empty, the words in data-ph. The
+        // input handler keeps the ph class honest as the agent types.
+        if (use === "missing" || use === "na")
+          return '<li contenteditable="true" class="' + use + ' ph" data-cls="' + use
+               + '" data-ph="' + esc(v) + '"></li>\n';
         return '<li contenteditable="true"' + (use ? ' class="' + use + '"' : "")
              + ">" + esc(v) + "</li>\n";
       }).join(""), null, key, base, note);
@@ -36840,10 +36862,12 @@ var CLOSURES_VELIZ = {
         } else if (na[t + "|" + f]) {
           // The only step that collects this was switched off, so it is not a
           // gap - nobody was ever going to answer it. Not counted as missing.
+          if (handFilled(key, NOT_APPLICABLE)) filled++;
           body += vals(f, key, [NOT_APPLICABLE], "na");
         } else if (nestOff(slug, t, f, data)) {
           // The branch that asks this never fired - see nestOff. Grey, not red,
           // and NOT counted as missing: nobody skipped anything.
+          if (handFilled(key, NOT_APPLICABLE)) filled++;
           body += vals(f, key, [NOT_APPLICABLE], "na");
         } else if (secVal(data, t, f) && !PICKED[key]) {
           // The worked SECTION answers this (SECTION_ANSWERS) - an answer,
@@ -36851,7 +36875,9 @@ var CLOSURES_VELIZ = {
           filled++;
           body += vals(f, key, [secVal(data, t, f)]);
         } else if (ask[f]) {
-          missing++;                       // asked, came back empty - real gap
+          // asked, came back empty - a real gap, unless the agent filled it in
+          // by hand in the panel
+          if (handFilled(key, NA)) filled++; else missing++;
           body += vals(f, key, [NA], "missing");
         } else if ((data.oc[t] || {})[f]) {
           // Only ever asked inside a call-outcome branch - so what it should
@@ -36869,9 +36895,11 @@ var CLOSURES_VELIZ = {
           // one somebody did.
           var ocv = transferOutcome(firm, defs, t);
           if (MANUAL[key]) body += vals(f, key, [MANUAL[key]]);
-          else if (ocv === "yes") body += vals(f, key, [NOT_APPLICABLE], "na");
-          else if (ocv === "no") {
-            missing++;
+          else if (ocv === "yes") {
+            if (handFilled(key, NOT_APPLICABLE)) filled++;
+            body += vals(f, key, [NOT_APPLICABLE], "na");
+          } else if (ocv === "no") {
+            if (handFilled(key, NA)) filled++; else missing++;
             body += vals(f, key, [NA], "missing");
           } else body += row(f, manual(key));
         } else {
@@ -36899,7 +36927,10 @@ var CLOSURES_VELIZ = {
           // Asked somewhere in the script, but only in a section this call
           // never worked - the question was never put to this caller, pick
           // list or not. Grey, not red, and not counted as missing (R4).
-          else if (elsewhere) body += vals(f, key, [NOT_APPLICABLE], "na");
+          else if (elsewhere) {
+            if (handFilled(key, NOT_APPLICABLE)) filled++;
+            body += vals(f, key, [NOT_APPLICABLE], "na");
+          }
           else if (opts[f] && opts[f].length) {
             // An unclicked pick is a MISSING answer, not a menu to send.
             //
@@ -37615,6 +37646,18 @@ var CLOSURES_VELIZ = {
     var ul = upTo(t, function (x) { return x.tagName === "UL"
                                         && x.getAttribute("data-ekey"); });
     if (!ul) return;
+    // Placeholder lines: typed into, the hint (and the grey) go; emptied
+    // again, the browser leaves a <br> behind that would defeat :empty, so
+    // it is cleared and the hint comes back.
+    var pli = bulletOf(t);
+    if (pli && pli.hasAttribute("data-ph")) {
+      var gone = (pli.textContent || "").trim() === "";
+      if (gone && pli.innerHTML !== "") pli.innerHTML = "";
+      // typed over: plain black like any answer; emptied: grey hint again
+      pli.classList.toggle("ph", gone);
+      pli.classList.toggle("missing", gone && pli.getAttribute("data-cls") === "missing");
+      pli.classList.toggle("na", gone && pli.getAttribute("data-cls") === "na");
+    }
     var key = ul.getAttribute("data-ekey");
     var text = Array.prototype.slice.call(ul.children)
       .map(function (li) { return (li.textContent || "").replace(/\s+$/, ""); })
@@ -37622,7 +37665,24 @@ var CLOSURES_VELIZ = {
     if (text.trim() === "") delete EDITED[key];
     else EDITED[key] = { text: text, base: ul.getAttribute("data-ebase") || "" };
     refreshPanelSubject(ul);
+    refreshTplCounts(ul);
   });
+
+  // The "N of M asked · X missing" labels catch up as the agent fills a gap
+  // in the panel. No redraw (the caret would jump): the panel is rebuilt off
+  // screen and only the count spans are copied across, in order.
+  function refreshTplCounts(edited_ul) {
+    var body = edited_ul.closest ? edited_ul.closest("div.livetplbody") : null;
+    if (!body) return;
+    var firm = document.getElementById((edited_ul.getAttribute("data-ekey") || "").split("|")[0]);
+    if (!firm) return;
+    var tmp = document.createElement("div");
+    tmp.innerHTML = liveTemplateHTML(firm);
+    var fresh = tmp.querySelectorAll("span.tplcount"), live = body.querySelectorAll("span.tplcount"), i;
+    if (fresh.length !== live.length) return;
+    for (i = 0; i < live.length; i++)
+      if (live[i].innerHTML !== fresh[i].innerHTML) live[i].innerHTML = fresh[i].innerHTML;
+  }
 
   // The subject line catches up THE MOMENT the field it reads is edited.
   //
