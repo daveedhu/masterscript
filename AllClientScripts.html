@@ -288,7 +288,7 @@
 <body>
 <header>
   <h1>All Client Scripts - Five9 Call Scripts</h1>
-  <p>Built Sep 21, 2026 01:10 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
+  <p>Built Sep 21, 2026 05:33 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
      Do not edit this page - it is rebuilt from the campaign scripts.</p>
   <input id="find" type="search" placeholder="Filter firms..." autocomplete="off">
 </header>
@@ -1910,6 +1910,14 @@ var CLOSURES_AMERICANIMMIGRATION = {
     </li>
 </ul>
 <br>
+<p><strong><span style="background-color:#d9d2e9;font-size:11pt;font-family:Arial,sans-serif;">If the caller is calling about an ICE Matter:</span></strong></p>
+<p><strong><span style="font-size:9pt;font-family:Arial,sans-serif;">Trigger words: </span></strong><span style="color:#0000ff;font-size:9pt;font-family:Arial,sans-serif;">ICE, ICE detention</span></p>
+<ul>
+    <li style="list-style-type:disc;color:#000000;font-size:11pt;font-family:Arial,sans-serif;">
+        <p role="presentation"><span style="font-size:11pt;font-family:Arial,sans-serif;">Proceed with New Client script</span></p>
+    </li>
+</ul>
+<br>
 <p><strong><u><span style="background-color:#d9d2e9;font-size:11pt;font-family:Arial,sans-serif;">Blocked Callers - Do Not Transfer List</span></u></strong></p>
 <ul>
     <li style="list-style-type:disc;color:#000000;font-size:11pt;font-family:Arial,sans-serif;">
@@ -2186,7 +2194,16 @@ var CLOSURES_AMERICANIMMIGRATION = {
                             </ol>
                         </li>
                         <li style="list-style-type:lower-alpha;color:#000000;font-size:9pt;font-family:Arial,sans-serif;">
-                            <p role="presentation"><span style="font-size:11pt;font-family:Arial,sans-serif;">Removal Defense / Humanitarian Immigration</span><span style="font-size:11pt;font-family:Arial,sans-serif;"><br></span><span style="color:#0000ff;font-size:11pt;font-family:Arial,sans-serif;">Note: Only qualify and forward these cases if the individual is not currently in an immigration detention center.</span></p>
+                            <p role="presentation"><u><span style="font-size:9pt;font-family:Arial,sans-serif;">ICE Matters</span></u></p>
+                            <p role="presentation"><strong><span style="font-size:9pt;font-family:Arial,sans-serif;">Trigger words: </span></strong><span style="color:#0000ff;font-size:9pt;font-family:Arial,sans-serif;">ICE, ICE detention</span></p>
+                            <ol>
+                                <li style="list-style-type:lower-roman;color:#000000;font-size:9pt;font-family:Arial,sans-serif;">
+                                    <p role="presentation"><span style="font-size:9pt;font-family:Arial,sans-serif;">ICE-related matters</span></p>
+                                </li>
+                            </ol>
+                        </li>
+                        <li style="list-style-type:lower-alpha;color:#000000;font-size:9pt;font-family:Arial,sans-serif;">
+                            <p role="presentation"><u><span style="font-size:9pt;font-family:Arial,sans-serif;">Removal Defense / Humanitarian Immigration</span></u><span style="font-size:9pt;font-family:Arial,sans-serif;"><br></span><span style="color:#0000ff;font-size:9pt;font-family:Arial,sans-serif;">Note: Only qualify and forward these cases if the individual is not currently in an immigration detention center.</span></p>
                             <ol>
                                 <li style="list-style-type:lower-roman;color:#000000;font-size:9pt;font-family:Arial,sans-serif;">
                                     <p role="presentation"><span style="font-size:9pt;font-family:Arial,sans-serif;">Removal defense / deportation defense (if not in a detention center)</span></p>
@@ -2236,15 +2253,6 @@ var CLOSURES_AMERICANIMMIGRATION = {
                 <li style="list-style-type:lower-roman;color:#000000;font-size:11pt;font-family:Arial,sans-serif;">
                     <p role="presentation"><strong><span style="font-size:11pt;font-family:Arial,sans-serif;">Disqualify Caller:</span></strong></p>
                     <ol>
-                        <li style="list-style-type:decimal;color:#0000ff;font-size:11pt;font-family:Arial,sans-serif;">
-                            <p role="presentation"><strong><span style="color:#0000ff;font-size:11pt;font-family:Arial,sans-serif;">If caller mentions ICE </span><span style="color:#9900ff;font-size:11pt;font-family:Arial,sans-serif;">- Disqualify</span></strong></p>
-                            <p role="presentation"><strong><span style="font-size:9pt;font-family:Arial,sans-serif;">Trigger words: </span></strong><span style="color:#0000ff;font-size:9pt;font-family:Arial,sans-serif;">ICE detention</span></p>
-                            <ol>
-                                <li style="list-style-type:lower-alpha;color:#ff0000;font-size:11pt;font-family:Arial,sans-serif;">
-                                    <p role="presentation"><em><span style="color:#ff0000;font-size:11pt;font-family:Arial,sans-serif;">&quot;I&#39;m sorry, but our attorneys are not currently handling ICE cases at this time.&quot;</span></em></p>
-                                </li>
-                            </ol>
-                        </li>
                         <li style="list-style-type:decimal;color:#0000ff;font-size:11pt;font-family:Arial,sans-serif;">
                             <p role="presentation"><strong><span style="color:#0000ff;font-size:11pt;font-family:Arial,sans-serif;">If caller mentions Immigration to </span><span style="color:#0000ff;font-size:11pt;font-family:Arial,sans-serif;">another country</span><span style="color:#0000ff;font-size:11pt;font-family:Arial,sans-serif;"> (Not US)</span><span style="color:#9900ff;font-size:11pt;font-family:Arial,sans-serif;"> - Disqualify </span></strong></p>
                             <ol>
