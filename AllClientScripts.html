@@ -183,6 +183,9 @@
       color: #202124; padding: .2rem .4rem; margin: .05rem 0;
       border: 1px solid #dadce0; border-radius: 4px; background: #fffdf5; }
   div.livetplbody li.manual input.tplman:focus { outline: 2px solid #fbbc04; }
+  /* Same yellow box as every other hand-typed field (David, 2026-09-21:
+     "make the field the same as before"); only the hint is grey italic. */
+  div.livetplbody li.manual input.tplman.hasdef::placeholder { color: #80868b; font-style: italic; }
   div.livetplbody b.warn { color: #b3261e; }
   /* Same red as the "N missing" count, at the same small size - one warning
      idiom on the panel, not two. It sits beside the field NAME, so nothing
@@ -285,7 +288,7 @@
 <body>
 <header>
   <h1>All Client Scripts - Five9 Call Scripts</h1>
-  <p>Built Sep 21, 2026 12:06 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
+  <p>Built Sep 21, 2026 01:10 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
      Do not edit this page - it is rebuilt from the campaign scripts.</p>
   <input id="find" type="search" placeholder="Filter firms..." autocomplete="off">
 </header>
@@ -32650,7 +32653,6 @@ var CLOSURES_THEBLEDSOEFIRM = {
     <p><strong><span style="background-color:#f4cccc;font-size:11pt;font-family:Arial,sans-serif;">Open Form:</span></strong><strong>
 </strong><a href="https://app.lawmatics.com/forms/share/347a0948-a8d6-47fb-b3cd-6bd3906cae32" rel="noopener noreferrer" target="_blank"><span style="color:#1155cc;font-size:11pt;font-family:Arial,sans-serif;"><u>https://app.lawmatics.com/forms/share/347a0948-a8d6-47fb-b3cd-6bd3906cae32</u></span></a>
 </p>
-    <p><u><span style="font-size:11pt;font-family:Arial,sans-serif;">Do not send call summary - submit form instead</span></u></p>
     <ol>
         <li style="list-style-type:decimal;color:#000000;font-size:11pt;font-family:Arial,sans-serif;">
             <p role="presentation"><strong><span style="font-size:11pt;font-family:Arial,sans-serif;">Full Name</span></strong></p>
@@ -35785,6 +35787,7 @@ var CLOSURES_VELIZ = {
 
   // Fields the template answers itself - "Client Type: New Client".
   var TPLCONST = {"199legacylaw": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "americanimmigration": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "berenson": {"New Client - Personal Injury": {"Client Type": "New Client", "Legal Matter": "Personal Injury Matter"}, "New Client - Employment Matter": {"Client Type": "New Client", "Legal Matter": "Employment Matter"}, "Existing Client": {"Client Type": "Existing Client"}, "Existing Case - Insurance": {"Call Type": "Existing Case - Insurance"}, "Existing Case - Medical": {"Call Type": "Existing Case - Medical"}}, "berman": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}, "Existing Case - Insurance": {"Call Type": "Existing Case - Insurance"}, "Existing Case - Medical": {"Call Type": "Existing Case - Medical"}}, "clarityfamilylaw": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "daiglelaw": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "frekhtman": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}, "Existing Case - Insurance": {"Call Type": "Existing Case - Insurance"}, "Existing Case - Medical": {"Call Type": "Existing Case - Medical"}}, "greerlaw": {"New Client": {"Client Type": "New Client"}, "New Client - Medical Malpractice": {"Client Type": "New Client", "Legal Matter": "Medical Malpractice"}, "Existing Client": {"Client Type": "Existing Client"}, "Existing Case - Insurance": {"Call Type": "Existing Case - Insurance"}, "Existing Case - Medical": {"Call Type": "Existing Case - Medical"}}, "holcomblaw": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "jamesspivey": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "joecunninghamlaw": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}, "Existing Case - Insurance": {"Call Type": "Existing Case - Insurance"}, "Existing Case - Medical": {"Call Type": "Existing Case - Medical"}}, "kevinsimonlaw": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "stusowskikraft": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "peterrusso": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "merkinjurylaw": {"New Client (MVA Accident)": {"Client Type": "New Client", "Consultation Location": "Phone"}, "New Client (Dog Bite)": {"Client Type": "New Client", "Purpose For Calling": "Dog Bite", "Consultation Location": "Phone"}, "New Client (Slip and Fall)": {"Client Type": "New Client", "Purpose For Calling": "Slip and Fall", "Consultation Location": "Phone"}, "Existing Client": {"Client Type": "Existing Client"}, "Existing Case - Insurance": {"Call Type": "Existing Case - Insurance"}, "Existing Case - Medical": {"Call Type": "Existing Case - Medical"}}, "ryanbrown": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}, "thebledsoefirm": {"Existing Client": {"Client Type": "Existing Client"}, "Third Party Subpoena Matter": {"Purpose For Calling": "Third Party Subpoena"}}, "veliz": {"New Client": {"Client Type": "New Client"}, "Existing Client": {"Client Type": "Existing Client"}}};
+  var MANUALDEF = {"thebledsoefirm": {"New Client": {"Booked Consultation Date/Time (PST)": "Not Applicable"}}};   // hand-typed fields with a default (see MANUAL_DEFAULT)
 
   // What a SECTION answers by itself - see SECTION_ANSWERS in the builder.
   // { firm: { section: { template: { field: value } } } }
@@ -35883,6 +35886,14 @@ var CLOSURES_VELIZ = {
   // on every keystroke in a script box; anything living only in the markup
   // would be wiped mid-sentence.
   var MANUAL = {};
+
+  // The default for a hand-typed field, or "" (MANUAL_DEFAULT on the Python side).
+  function manualDefault(key) {
+    var parts = key.split("|");
+    if (parts.length < 3) return "";
+    var slug = parts[0].replace("firm-", ""), t = parts[1], f = parts.slice(2).join("|");
+    return ((MANUALDEF[slug] || {})[t] || {})[f] || "";
+  }
 
   // A field the agent edited by hand in the live email panel. David,
   // 2026-09-09: "this will give our agents more flexibility when they review
@@ -36760,9 +36771,12 @@ var CLOSURES_VELIZ = {
     }
     function manual(key) {
       // The value lives in MANUAL, not in the input, so a redraw restores it.
-      return '<li class="manual"><input type="text" class="tplman" data-mkey="'
-           + esc(key) + '" value="' + esc(MANUAL[key] || "")
-           + '" placeholder="add from the call"></li>\n';
+      // A field with a default shows it as the hint and sends it if nothing
+      // is typed (MANUAL_DEFAULT); every other one asks to be filled in.
+      var def = manualDefault(key);
+      return '<li class="manual"><input type="text" class="tplman' + (def ? " hasdef" : "")
+           + '" data-mkey="' + esc(key) + '" value="' + esc(MANUAL[key] || "")
+           + '" placeholder="' + esc(def || "add from the call") + '"></li>\n';
     }
     // A picked option is an ANSWER, so it is editable like every other value.
     //
@@ -37343,6 +37357,7 @@ var CLOSURES_VELIZ = {
         }
         else if (fixed) list = edited(key, [fixed]);   // the template answers it
         else if (MANUAL[key]) list = [MANUAL[key]];    // typed by the agent
+        else if (manualDefault(key)) list = [manualDefault(key)];   // its default (MANUAL_DEFAULT)
         else list = ["\u00a0"];         // nothing asks this - leave it blank
         if (slot[f] === undefined) { slot[f] = list; order.push(f); }
       });
