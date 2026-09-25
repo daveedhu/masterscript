@@ -317,7 +317,7 @@
 <body>
 <header>
   <h1>All Client Scripts - Five9 Call Scripts</h1>
-  <p>Built Sep 25, 2026 01:29 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
+  <p>Built Sep 25, 2026 06:10 PM Eastern from 18 campaign scripts. Warm transfer banners are live.
      Do not edit this page - it is rebuilt from the campaign scripts.</p>
   <input id="find" type="search" placeholder="Filter firms..." autocomplete="off">
 </header>
@@ -37755,6 +37755,22 @@ var CLOSURES_VELIZ = {
   // How a FIELD header (Client Type, Caller Name, and the nested conditional
   // sub-headers) is wrapped in the paste. Intro headers stay <strong>.
   // David, 2026-09-18: "slightly bolded" - semi-bold (600), not full bold.
+  // FIVE9-SAFE PASTE. David, 2026-09-25: agents get "Draft Initialization
+  // Error - Network" on Send in Five9 email since the HTML pages went live.
+  // Suspects in the pasted HTML: the invisible no-break space that marks a
+  // blank value, and the empty <div> spacers between fields. Both go here, at
+  // the one point the clipboard is written, for BOTH copy buttons: the space
+  // becomes an ordinary space, a spacer becomes top margin on the next header.
+  // Plain text never had either. MASTER ONLY for now (David) - a trial.
+  function five9Safe(h) {
+    if (!h) return h;
+    h = h.replace(/\u00a0/g, " ");
+    h = h.replace(/<div style="height:\.55em"><\/div><p style="margin:\.15em 0">/g,
+                  '<p style="margin:.7em 0 .15em">');
+    h = h.replace(/<div style="height:\.55em"><\/div>/g, "");
+    return h;
+  }
+
   function fieldHead(escaped) {
     if (FIELD_HEADERS_BOLD === "semi") return '<span style="font-weight:600">' + escaped + "</span>";
     if (FIELD_HEADERS_BOLD) return "<strong>" + escaped + "</strong>";
@@ -38477,6 +38493,7 @@ var CLOSURES_VELIZ = {
     var CO = {};
     var text = isNotes ? notesPlain(firm, CO) : tplPlain(firm, CO);
     var rich = isNotes ? (notesUntouched(firm) ? "" : notesRich(firm, CO)) : tplRich(firm, CO);
+    rich = five9Safe(rich);          // see five9Safe - trial, 2026-09-25
     if (!text) {
       mark(firm, isNotes ? "Notes are still the blank template"
                          : "Nothing filled in yet", false, isNotes ? "n" : "s");
